@@ -1,0 +1,201 @@
+/* --- 1. GLOBAL VARIABLES (COTTON CANDY THEME) --- */
+:root {
+    --font-primary: 'Poppins', sans-serif;
+    
+    /* PALET WARNA BARU: PINK - UNGU - BIRU PASTEL */
+    --primary-color: #a29bfe;       /* Pastel Purple (Utama) */
+    --primary-hover: #6c5ce7;       /* Ungu lebih gelap untuk hover */
+    
+    --secondary-color: #74b9ff;     /* Pastel Blue (Langit) */
+    --accent-color: #fd79a8;        /* Pastel Pink (Manis) */
+    
+    /* Background yang sangat lembut (sedikit tint ungu) */
+    --bg-color: #fdfbfd;            
+    --card-bg: #ffffff;
+    
+    --text-dark: #2d3436;
+    --text-muted: #636e72;
+    
+    /* Shadow Berwarna Ungu/Pink Halus */
+    --card-shadow: 0 10px 30px rgba(162, 155, 254, 0.15); 
+    --hover-shadow: 0 15px 35px rgba(253, 121, 168, 0.2);
+    
+    --border-radius: 20px;
+    --btn-radius: 50px;
+}
+
+/* --- 2. BASE STYLES --- */
+body {
+    font-family: var(--font-primary);
+    background-color: var(--bg-color);
+    /* Background Gradient Halus untuk Body (Opsional, agar lebih dreamy) */
+    background-image: linear-gradient(120deg, #fdfbfd 0%, #f4f0fd 100%);
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+/* --- 3. NAVBAR (Glassmorphism + Gradient Border) --- */
+.navbar {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px); /* Efek kaca lebih kuat */
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    padding: 15px 0;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    /* Teks Logo jadi Gradient Pink-Ungu */
+    background: -webkit-linear-gradient(45deg, var(--accent-color), var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.5rem;
+}
+
+/* Ikon di Navbar */
+.icon-shape {
+    background: linear-gradient(135deg, var(--accent-color), var(--primary-color)) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 10px rgba(253, 121, 168, 0.3);
+}
+
+/* --- 4. CARD STYLING --- */
+.card {
+    background: var(--card-bg);
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+}
+
+/* Header Card: Gradient Putih ke Ungu Muda */
+.card-header {
+    background: linear-gradient(to right, #fff, #f8f7ff);
+    border-bottom: 1px solid #f0f0f5;
+    padding: 20px 25px;
+    font-weight: 600;
+    color: var(--primary-hover); /* Ungu agak gelap biar terbaca */
+}
+
+/* --- 5. BUTTONS (Dreamy Gradients) --- */
+.btn {
+    border-radius: var(--btn-radius);
+    padding: 10px 25px;
+    font-weight: 500;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+/* Tombol Utama: Gradient Ungu ke Pink */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    box-shadow: 0 4px 15px rgba(162, 155, 254, 0.4);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--primary-hover), var(--accent-color));
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(253, 121, 168, 0.5);
+}
+
+/* Tombol Tambah/Aksi: Gradient Biru ke Ungu */
+.btn-success {
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    box-shadow: 0 4px 15px rgba(116, 185, 255, 0.4);
+}
+
+.btn-info {
+    background: linear-gradient(135deg, #81ecec, #74b9ff);
+    color: #fff !important;
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+    color: #fff;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #ff7675, #d63031);
+    box-shadow: 0 4px 15px rgba(255, 118, 117, 0.4);
+}
+
+/* --- 6. FORM & INPUTS --- */
+.form-control, .form-select {
+    border-radius: 15px;
+    border: 2px solid #f4f0fd; /* Border ungu sangat muda */
+    padding: 12px 15px;
+    background-color: #fff;
+    color: var(--text-dark);
+}
+
+.form-control:focus, .form-select:focus {
+    box-shadow: 0 0 0 4px rgba(162, 155, 254, 0.2); /* Glow Ungu */
+    border-color: var(--primary-color);
+}
+
+/* --- 7. TABLE STYLING --- */
+.table thead th {
+    background-color: #f9f8ff; /* Latar header tabel ungu muda banget */
+    color: var(--primary-hover);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    border: none;
+    padding: 15px;
+}
+
+.table tbody tr {
+    transition: all 0.2s;
+    border-bottom: 1px solid #fcfcfc;
+}
+
+/* Hover Baris: Warna Pink Muda */
+.table tbody tr:hover {
+    background-color: #fff0f6 !important; 
+    transform: scale(1.005);
+    box-shadow: 0 5px 15px rgba(253, 121, 168, 0.05);
+}
+
+.table td {
+    border-bottom: 1px solid #f8f4fa;
+    padding: 18px 15px;
+    color: var(--text-dark);
+}
+
+/* --- 8. BADGES (Pastel Pop) --- */
+.badge {
+    padding: 8px 14px;
+    font-weight: 500;
+    border-radius: 30px;
+}
+
+/* Badge Kuliah (Biru) */
+.bg-primary { 
+    background-color: rgba(116, 185, 255, 0.15) !important;
+    color: #0984e3 !important;
+}
+
+/* Badge Kerja (Ungu) */
+.bg-success { 
+    background-color: rgba(162, 155, 254, 0.15) !important;
+    color: #6c5ce7 !important;
+}
+
+/* Badge Hobi (Pink) */
+.bg-warning { 
+    background-color: rgba(253, 121, 168, 0.15) !important;
+    color: #e84393 !important;
+}

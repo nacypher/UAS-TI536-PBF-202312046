@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+<div class="container">
+    <div class="card">
+        <div class="card-header bg-warning">Edit Aktivitas</div>
+        <div class="card-body">
+            <form action="/activities/update/<%= activity.id %>?_method=PUT" method="POST">
+                <div class="mb-3"><label>Judul</label><input type="text" name="judul_aktivitas" value="<%= activity.judul_aktivitas %>" class="form-control" required></div>
+                <div class="mb-3">
+                    <label>Kategori</label>
+                    <select name="kategori" class="form-select" required>
+                        <option value="Kuliah" <%= activity.kategori=='Kuliah'?'selected':'' %>>Kuliah</option>
+                        <option value="Kerja" <%= activity.kategori=='Kerja'?'selected':'' %>>Kerja</option>
+                        <option value="Hobi" <%= activity.kategori=='Hobi'?'selected':'' %>>Hobi</option>
+                    </select>
+                </div>
+                <div class="mb-3"><label>Tanggal</label><input type="date" name="tanggal" value="<%= new Date(activity.tanggal).toISOString().split('T')[0] %>" class="form-control" required></div>
+                <button class="btn btn-primary">Update</button>
+                <a href="/activities" class="btn btn-secondary">Batal</a>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include('../partials/footer') %>

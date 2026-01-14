@@ -1,0 +1,65 @@
+<%- include('../partials/header') %>
+<div class="container">
+    <a href="/activities" class="btn btn-outline-secondary mb-3">&larr; Kembali</a>
+    
+    <% if(success.length > 0){ %><div class="alert alert-success"><%= success %></div><% } %>
+    <% if(error.length > 0){ %><div class="alert alert-danger"><%= error %></div><% } %>
+
+    <div class="card border-primary mb-4">
+        <div class="card-header bg-primary text-white d-flex justify-content-between">
+            <span>Detail Aktivitas</span>
+            <span>Total: <%= totalDuration %> Menit</span>
+        </div>
+        <div class="card-body">
+            <h3><%= activity.judul_aktivitas %></h3>
+            <p class="mb-0">Kategori: <strong><%= activity.kategori %></strong> | Tanggal: <%= new Date(activity.tanggal).toLocaleDateString('id-ID') %></p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <span>Rincian Kegiatan</span>
+            <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modalAddDetail">+ Tambah Rincian</button>
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead><tr><th>Deskripsi</th><th>Durasi</th><th>Status</th><th>Aksi</th></tr></thead>
+                <tbody>
+                    <% if(details.length === 0){ %><tr><td colspan="4" class="text-center">Belum ada rincian.</td></tr><% } %>
+                    <% details.forEach(dt => { %>
+                    <tr>
+                        <td><%= dt.deskripsi_detail %></td>
+                        <td><%= dt.durasi %> Menit</td>
+                        <td><span class="badge <%= dt.status=='Selesai'?'bg-success':'bg-warning' %>"><%= dt.status %></span></td>
+                        <td>
+                            <a href="/details/edit/<%= dt.id %>" class="btn btn-sm btn-warning">Edit</a>
+                            <form action="/details/delete/<%= dt.id %>?_method=DELETE" method="POST" class="d-inline" onsubmit="return confirm('Hapus?')">
+                                <button class="btn btn-sm btn-danger">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalAddDetail">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/details/<%= activity.id %>" method="POST">
+                <div class="modal-header"><h5 class="modal-title">Tambah Rincian</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body">
+                    <div class="mb-3"><label>Deskripsi</label><textarea name="deskripsi_detail" class="form-control" required></textarea></div>
+                    <div class="mb-3"><label>Durasi (Menit)</label><input type="number" name="durasi" class="form-control" required></div>
+                    <div class="mb-3"><label>Status</label>
+                        <select name="status" class="form-select"><option value="Belum">Belum</option><option value="Selesai">Selesai</option></select>
+                    </div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-primary">Simpan</button></div>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include('../partials/footer') %>

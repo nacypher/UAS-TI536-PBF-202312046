@@ -1,0 +1,119 @@
+<%- include('../partials/header') %>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-0" style="color: var(--primary-hover);">Daftar Aktivitas</h2>
+            <p class="text-muted mb-0">Kelola kegiatan harianmu dengan mudah</p>
+        </div>
+        <a href="/activities/create" class="btn btn-primary shadow-sm">
+            <i class="fas fa-plus me-2"></i>Tambah Baru
+        </a>
+    </div>
+
+    <% if (success && success.length > 0) { %>
+        <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm" role="alert">
+            <i class="fas fa-check-circle me-2"></i> <%= success %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    <% } %>
+    <% if (error && error.length > 0) { %>
+        <div class="alert alert-danger alert-dismissible fade show border-0 shadow-sm" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i> <%= error %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    <% } %>
+
+    <div class="card mb-4 border-0">
+        <div class="card-body p-4">
+            <form action="/activities" method="GET" class="row g-3 align-items-end">
+                <div class="col-md-4">
+                    <label class="form-label fw-bold text-secondary small text-uppercase">Tanggal</label>
+                    <input type="date" name="tanggal" class="form-control" value="<%= query.tanggal %>">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold text-secondary small text-uppercase">Kategori</label>
+                    <select name="kategori" class="form-select">
+                        <option value="">-- Semua Kategori --</option>
+                        <option value="Kuliah" <%= query.kategori == 'Kuliah' ? 'selected' : '' %>>Kuliah</option>
+                        <option value="Kerja" <%= query.kategori == 'Kerja' ? 'selected' : '' %>>Kerja</option>
+                        <option value="Hobi" <%= query.kategori == 'Hobi' ? 'selected' : '' %>>Hobi</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary flex-grow-1">
+                            <i class="fas fa-filter me-1"></i> Filter
+                        </button>
+                        <a href="/activities" class="btn btn-light border text-muted" title="Reset Filter">
+                            <i class="fas fa-undo"></i>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm overflow-hidden">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="text-center py-3 fw-bolder text-dark">NO</th>
+                            <th class="text-center py-3 fw-bolder text-dark">TANGGAL</th>
+                            <th class="text-center py-3 fw-bolder text-dark">JUDUL AKTIVITAS</th>
+                            <th class="text-center py-3 fw-bolder text-dark">KATEGORI</th>
+                            <th class="text-center py-3 fw-bolder text-dark">AKSI</th>
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle"> 
+                        <% if (activities.length === 0) { %>
+                            <tr><td colspan="5" class="text-center py-5 text-muted fst-italic">Belum ada aktivitas yang dicatat.</td></tr>
+                        <% } %>
+                        
+                        <% activities.forEach((act, i) => { %>
+                        <tr>
+                            <td class="text-center fw-bold text-muted"><%= i + 1 %></td>
+                            
+                            <td class="text-center">
+                                <span class="fw-medium text-secondary">
+                                    <%= new Date(act.tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) %>
+                                </span>
+                            </td>
+                            
+                            <td class="text-center fw-semibold">
+                                <a href="/details/<%= act.id %>" class="text-dark text-decoration-none" title="Klik untuk lihat detail">
+                                    <%= act.judul_aktivitas %>
+                                </a>
+                            </td>
+                            
+                            <td class="text-center">
+                                <span class="badge rounded-pill bg-<%= act.kategori == 'Kuliah' ? 'primary' : (act.kategori == 'Kerja' ? 'success' : 'warning') %> bg-opacity-10 text-<%= act.kategori == 'Kuliah' ? 'primary' : (act.kategori == 'Kerja' ? 'success' : 'dark') %> px-3 py-2">
+                                    <%= act.kategori %>
+                                </span>
+                            </td>
+                            
+                            <td class="text-center">
+                                <a href="/details/<%= act.id %>" class="btn btn-sm btn-info text-white rounded-pill px-3" title="Lihat Detail">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="/activities/edit/<%= act.id %>" class="btn btn-sm btn-warning text-dark rounded-pill px-3 ms-1" title="Edit">
+                                    <i class="fas fa-pen"></i>
+                                </a>
+                                <form action="/activities/delete/<%= act.id %>?_method=DELETE" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus aktivitas ini?')">
+                                    <button class="btn btn-sm btn-danger rounded-pill px-3 ms-1" title="Hapus">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>
