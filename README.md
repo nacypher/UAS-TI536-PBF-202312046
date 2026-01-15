@@ -1,8 +1,13 @@
-# 📋 UAS-TI536-PBF: Sistem Pencatatan Aktivitas Harian
+# 📋 Sistem Pencatatan Aktivitas Harian
 
 ![Status](https://img.shields.io/badge/status-active-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Node Version](https://img.shields.io/badge/node-%3E%3D14.0-green)
+
+![Node.js](https://img.shields.io/badge/Node.js-V18+-339933?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-4.x-000000?style=for-the-badge&logo=express&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-Database-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
 
 Aplikasi web untuk mencatat, mengelola, dan melacak aktivitas harian dengan antarmuka yang intuitif dan responsif.
 
