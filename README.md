@@ -48,10 +48,9 @@ Aplikasi web untuk mencatat, mengelola, dan melacak aktivitas harian dengan anta
 
 | Kategori | Teknologi |
 |----------|-----------|
-| Frontend | HTML5, CSS3, JavaScript ES6+ |
-| Framework | React / Vue.js *(sesuaikan* |
+| Frontend | EJS (Templating), Bootstrap 5, Custom CSS |
 | Backend | Node.js, Express.js |
-| Database | MongoDB / PostgreSQL |
+| Database | MySQL (Library: `mysql2`) |
 | Tools | Git, npm/yarn, VS Code |
 
 ---
