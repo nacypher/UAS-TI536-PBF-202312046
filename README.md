@@ -28,13 +28,19 @@ Aplikasi web untuk mencatat, mengelola, dan melacak aktivitas harian dengan anta
 
 ## ✨ Fitur Utama
 
-- ✅ Tambah, edit, dan hapus aktivitas harian
-- ✅ Kategorisasi aktivitas
-- ✅ Filter dan pencarian aktivitas
-- ✅ Pengaturan prioritas tugas
-- ✅ Dashboard ringkasan aktivitas
-- ✅ Export data aktivitas
-- ✅ Responsif di semua perangkat
+### 🔐 Autentikasi Pengguna
+* **Register & Login**: Keamanan password terjamin menggunakan hashing `bcryptjs`.
+* **Session Management**: Menjaga sesi login pengguna agar tetap aman.
+
+### 📅 Manajemen Aktivitas (Master)
+* **CRUD Aktivitas**: Kelola data aktivitas harian (Buat, Baca, Edit, Hapus).
+* **Filter Canggih**: Cari aktivitas berdasarkan **Tanggal** dan **Kategori** (Kuliah, Kerja, Hobi).
+* **Validasi Data**: Memastikan input user lengkap sebelum disimpan.
+
+### 📝 Rincian Aktivitas (Detail)
+* **Relasi Master-Detail**: Satu aktivitas dapat memiliki banyak rincian tugas.
+* **Tracking Durasi**: Mencatat durasi per item dan menghitung total waktu aktivitas secara otomatis.
+* **Status Progress**: Menandai rincian tugas sebagai "Selesai" atau "Belum".
 
 ---
 
