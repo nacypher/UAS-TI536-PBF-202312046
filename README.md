@@ -1,8 +1,13 @@
-# 📋 UAS-TI536-PBF: Sistem Pencatatan Aktivitas Harian
+# 📋 Sistem Pencatatan Aktivitas Harian
 
 ![Status](https://img.shields.io/badge/status-active-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Node Version](https://img.shields.io/badge/node-%3E%3D14.0-green)
+
+![Node.js](https://img.shields.io/badge/Node.js-V18+-339933?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-4.x-000000?style=for-the-badge&logo=express&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-Database-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
 
 Aplikasi web untuk mencatat, mengelola, dan melacak aktivitas harian dengan antarmuka yang intuitif dan responsif.
 
@@ -23,13 +28,19 @@ Aplikasi web untuk mencatat, mengelola, dan melacak aktivitas harian dengan anta
 
 ## ✨ Fitur Utama
 
-- ✅ Tambah, edit, dan hapus aktivitas harian
-- ✅ Kategorisasi aktivitas
-- ✅ Filter dan pencarian aktivitas
-- ✅ Pengaturan prioritas tugas
-- ✅ Dashboard ringkasan aktivitas
-- ✅ Export data aktivitas
-- ✅ Responsif di semua perangkat
+### 🔐 Autentikasi Pengguna
+* **Register & Login**: Keamanan password terjamin menggunakan hashing `bcryptjs`.
+* **Session Management**: Menjaga sesi login pengguna agar tetap aman.
+
+### 📅 Manajemen Aktivitas (Master)
+* **CRUD Aktivitas**: Kelola data aktivitas harian (Buat, Baca, Edit, Hapus).
+* **Filter Canggih**: Cari aktivitas berdasarkan **Tanggal** dan **Kategori** (Kuliah, Kerja, Hobi).
+* **Validasi Data**: Memastikan input user lengkap sebelum disimpan.
+
+### 📝 Rincian Aktivitas (Detail)
+* **Relasi Master-Detail**: Satu aktivitas dapat memiliki banyak rincian tugas.
+* **Tracking Durasi**: Mencatat durasi per item dan menghitung total waktu aktivitas secara otomatis.
+* **Status Progress**: Menandai rincian tugas sebagai "Selesai" atau "Belum".
 
 ---
 
@@ -37,10 +48,9 @@ Aplikasi web untuk mencatat, mengelola, dan melacak aktivitas harian dengan anta
 
 | Kategori | Teknologi |
 |----------|-----------|
-| Frontend | HTML5, CSS3, JavaScript ES6+ |
-| Framework | React / Vue.js *(sesuaikan* |
+| Frontend | EJS (Templating), Bootstrap 5, Custom CSS |
 | Backend | Node.js, Express.js |
-| Database | MongoDB / PostgreSQL |
+| Database | MySQL (Library: `mysql2`) |
 | Tools | Git, npm/yarn, VS Code |
 
 ---
@@ -83,6 +93,48 @@ npm start
 Aplikasi akan berjalan di `http://localhost:3000`
 
 ---
+
+## 🗄️ Database Schema
+
+Aplikasi ini menggunakan database MySQL bernama `daily_activity_db`. Terdapat 3 tabel utama yang saling berelasi:
+
+### 1. `users`
+Menyimpan data pengguna untuk keperluan autentikasi.
+
+| Kolom | Tipe Data | Keterangan |
+| :--- | :--- | :--- |
+| `id` | INT | Primary Key, Auto Increment |
+| `username` | VARCHAR(50) | Unik (digunakan untuk login) |
+| `password` | VARCHAR(255) | Disimpan dalam bentuk hash (Bcrypt) |
+| `nama_lengkap` | VARCHAR(100) | Nama lengkap pengguna |
+
+### 2. `activities` (Master)
+Menyimpan data induk aktivitas harian pengguna.
+
+| Kolom | Tipe Data | Keterangan |
+| :--- | :--- | :--- |
+| `id` | INT | Primary Key, Auto Increment |
+| `user_id` | INT | Foreign Key (Relasi ke tabel `users`) |
+| `judul_aktivitas` | VARCHAR(255) | Judul kegiatan |
+| `kategori` | VARCHAR(50) | Pilihan: Kuliah, Kerja, Hobi |
+| `tanggal` | DATE | Tanggal aktivitas dilakukan |
+| `created_at` | TIMESTAMP | Waktu pembuatan data (Default: Current Time) |
+
+### 3. `activity_details` (Detail)
+Menyimpan rincian tugas dari setiap aktivitas.
+
+| Kolom | Tipe Data | Keterangan |
+| :--- | :--- | :--- |
+| `id` | INT | Primary Key, Auto Increment |
+| `activity_id` | INT | Foreign Key (Relasi ke tabel `activities`) |
+| `deskripsi_detail` | TEXT | Penjelasan detail tugas |
+| `durasi` | INT | Lama pengerjaan dalam menit |
+| `status` | ENUM | Pilihan: 'Selesai', 'Belum' (Default: 'Belum') |
+
+### 🔗 Relasi Antar Tabel (ERD)
+* **One-to-Many (User ke Activities):** Satu user bisa memiliki banyak aktivitas.
+* **One-to-Many (Activity ke Details):** Satu aktivitas bisa memiliki banyak rincian tugas.
+* **On Delete Cascade:** Jika User dihapus, semua Aktivitasnya terhapus. Jika Aktivitas dihapus, semua Detailnya terhapus.
 
 ## 📖 Panduan Penggunaan
 
