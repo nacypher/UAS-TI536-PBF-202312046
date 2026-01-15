@@ -1,4 +1,3 @@
-
 # 📋 UAS-TI536-PBF: Sistem Pencatatan Aktivitas Harian
 
 ![Status](https://img.shields.io/badge/status-active-brightgreen)
@@ -100,13 +99,54 @@ Aplikasi akan berjalan di `http://localhost:3000`
 UAS-TI536-PBF-202312046/
 ├── src/
 │   ├── components/
+│   │   ├── ActivityCard.jsx
+│   │   ├── ActivityForm.jsx
+, ActivityModal.jsx
+│   ├── ActivityCard.jsx
+│   ├── ActivityForm.jsx, ActivityModal.jsx
+│   ├── Filter.jsx
+│   └── Header.jsx
+│   │   ├── Filter.jsx
+│   │   └── Header.jsx
 │   ├── pages/
+│   │   ├── Dashboard.jsx
+│   │   ├── ActivityList.jsx
+│   │   └── Settings.jsx
 │   ├── styles/
-│   └── utils/
+│   │   ├── main.css
+│   │   ├── components.css
+│   │   └── responsive.css
+│   ├── utils/
+│   │   ├── api.js
+│   │   ├── helpers.js
+│   │   └── validators.js
+│   ├── App.jsx
+│   └── index.js
 ├── public/
+│   ├── index.html
+│   ├── favicon.ico
+│   └── assets/
+│       ├── images/
+│       └── icons/
+├── server/
+│   ├── routes/
+│   │   ├── activities.js
+│   │   └── users.js
+│   ├── models/
+│   │   ├── Activity.js
+│   │   └── User.js
+│   ├── middleware/
+│   │   └── auth.js
+│   ├── controllers/
+│   │   └── activityController.js
+│   └── server.js
 ├── config/
+│   ├── database.js
+│   └── environment.js
 ├── .env.example
+├── .gitignore
 ├── package.json
+├── package-lock.json
 └── README.md
 ```
 
