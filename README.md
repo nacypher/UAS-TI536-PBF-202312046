@@ -94,8 +94,6 @@ Aplikasi akan berjalan di `http://localhost:3000`
 
 ---
 
----
-
 ## 🗄️ Database Schema
 
 Aplikasi ini menggunakan database MySQL bernama `daily_activity_db`. Terdapat 3 tabel utama yang saling berelasi:
