@@ -94,6 +94,50 @@ Aplikasi akan berjalan di `http://localhost:3000`
 
 ---
 
+---
+
+## 🗄️ Database Schema
+
+Aplikasi ini menggunakan database MySQL bernama `daily_activity_db`. Terdapat 3 tabel utama yang saling berelasi:
+
+### 1. `users`
+Menyimpan data pengguna untuk keperluan autentikasi.
+
+| Kolom | Tipe Data | Keterangan |
+| :--- | :--- | :--- |
+| `id` | INT | Primary Key, Auto Increment |
+| `username` | VARCHAR(50) | Unik (digunakan untuk login) |
+| `password` | VARCHAR(255) | Disimpan dalam bentuk hash (Bcrypt) |
+| `nama_lengkap` | VARCHAR(100) | Nama lengkap pengguna |
+
+### 2. `activities` (Master)
+Menyimpan data induk aktivitas harian pengguna.
+
+| Kolom | Tipe Data | Keterangan |
+| :--- | :--- | :--- |
+| `id` | INT | Primary Key, Auto Increment |
+| `user_id` | INT | Foreign Key (Relasi ke tabel `users`) |
+| `judul_aktivitas` | VARCHAR(255) | Judul kegiatan |
+| `kategori` | VARCHAR(50) | Pilihan: Kuliah, Kerja, Hobi |
+| `tanggal` | DATE | Tanggal aktivitas dilakukan |
+| `created_at` | TIMESTAMP | Waktu pembuatan data (Default: Current Time) |
+
+### 3. `activity_details` (Detail)
+Menyimpan rincian tugas dari setiap aktivitas.
+
+| Kolom | Tipe Data | Keterangan |
+| :--- | :--- | :--- |
+| `id` | INT | Primary Key, Auto Increment |
+| `activity_id` | INT | Foreign Key (Relasi ke tabel `activities`) |
+| `deskripsi_detail` | TEXT | Penjelasan detail tugas |
+| `durasi` | INT | Lama pengerjaan dalam menit |
+| `status` | ENUM | Pilihan: 'Selesai', 'Belum' (Default: 'Belum') |
+
+### 🔗 Relasi Antar Tabel (ERD)
+* **One-to-Many (User ke Activities):** Satu user bisa memiliki banyak aktivitas.
+* **One-to-Many (Activity ke Details):** Satu aktivitas bisa memiliki banyak rincian tugas.
+* **On Delete Cascade:** Jika User dihapus, semua Aktivitasnya terhapus. Jika Aktivitas dihapus, semua Detailnya terhapus.
+
 ## 📖 Panduan Penggunaan
 
 1. **Dashboard**: Lihat ringkasan aktivitas hari ini
